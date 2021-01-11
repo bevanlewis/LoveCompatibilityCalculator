@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/home_page.dart';
 import 'screens/results_page.dart';
+import 'constants.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: kBackgroudColor,
       ),
       initialRoute: MyHomePage.routeName,
       routes: {

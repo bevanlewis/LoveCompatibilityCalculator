@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
+import 'package:flutter/animation.dart';
 
 class ResultsPage extends StatefulWidget {
   static const routeName = 'results_page';
@@ -6,21 +8,53 @@ class ResultsPage extends StatefulWidget {
   _ResultsPageState createState() => _ResultsPageState();
 }
 
-class _ResultsPageState extends State<ResultsPage> {
+class _ResultsPageState extends State<ResultsPage>
+    with SingleTickerProviderStateMixin {
+  AnimationController controller;
+  Animation animation;
+  int value;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 1),
+    );
+    animation = Tween<double>(
+      begin: 0,
+      end: Random().nextDouble() * 100,
+    ).animate(controller)
+      ..addListener(() {
+        setState(() {});
+        value = animation.value.toInt();
+      });
+    controller.forward();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.pink[100],
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(
-              Icons.favorite,
-              color: Colors.red,
-              size: 450.0,
+            Hero(
+              tag: 'Heart',
+              child: Icon(
+                Icons.favorite,
+                color: Colors.red,
+                size: 450.0,
+              ),
             ),
+            Text(
+              'You are $value% compatible',
+              style: TextStyle(
+                color: Colors.pink[800],
+                fontSize: 30.0,
+              ),
+            )
           ],
         ),
       ),
