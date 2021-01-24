@@ -21,6 +21,7 @@ class _ResultsPageState extends State<ResultsPage>
       vsync: this,
       duration: Duration(seconds: 1),
     );
+
     animation = Tween<double>(
       begin: 0,
       end: Random().nextDouble() * 100,
@@ -29,11 +30,14 @@ class _ResultsPageState extends State<ResultsPage>
         setState(() {});
         value = animation.value.toInt();
       });
+
     controller.forward();
   }
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -45,14 +49,14 @@ class _ResultsPageState extends State<ResultsPage>
               child: Icon(
                 Icons.favorite,
                 color: Colors.red,
-                size: 450.0,
+                size: width,
               ),
             ),
             Text(
               'You are $value% compatible',
               style: TextStyle(
                 color: Colors.pink[800],
-                fontSize: 30.0,
+                fontSize: width * 0.08,
               ),
             )
           ],

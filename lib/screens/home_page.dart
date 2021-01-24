@@ -11,6 +11,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -30,14 +32,27 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Hero(
                   tag: 'Heart',
                   child: IconButton(
-                    iconSize: 250.0,
+                    iconSize: width * 0.7,
                     onPressed: () {
                       Navigator.pushNamed(context, ResultsPage.routeName);
                     },
-                    icon: Icon(
-                      Icons.favorite,
-                      color: Colors.red,
-                      semanticLabel: 'CALCULATE',
+                    icon: Stack(
+                      children: [
+                        Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                          semanticLabel: 'CALCULATE',
+                        ),
+                        Center(
+                          child: Text(
+                            'CALCULATE',
+                            style: TextStyle(
+                              color: Colors.pink[50],
+                              fontSize: width * 0.06,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -45,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
               // Enter your partner's name
               Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: HomeTextField("Partner's name"),
+                child: HomeTextField("Partner's Name"),
               ),
             ],
           ),
